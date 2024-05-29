@@ -4,6 +4,10 @@ public class Animal {
 
 	private String nome;
 	private String idade;
+	private Double peso;
+	private Double valor;
+	private Double calcValor;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -16,7 +20,26 @@ public class Animal {
 	public void setIdade(String idade) {
 		this.idade = idade;
 	}
-	
-	public Animal() {
+	public Double getPeso() {
+		return peso;
 	}
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+	public Double getValor() {
+		return valor;
+	}
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+	public Double getCalcValor() {
+		return calcValor;
+	}
+	public void setCalcValor(Double calcValor) {
+		this.calcValor = calcValor;
+	}
+	
+
+	
+	
 }
