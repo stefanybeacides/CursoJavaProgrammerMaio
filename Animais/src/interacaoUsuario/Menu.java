@@ -27,13 +27,23 @@ public void menuInicial() {
 		// tudo que está dentro do while vai se repetir enquanto(while) a variavel menuResultado for true(verdadeiro)
 		while (menuResultado) {
 			
-			opcao = Integer.parseInt(JOptionPane.showInputDialog("Digite 1 para Cachorro " + "\n"
+			String questao = JOptionPane.showInputDialog("Digite 1 para Cachorro " + "\n"
 					+ " Digite 2 para Gato" + "\n" 
 					+ " Digite 3 para listar os Cachorros" + "\n"
 					+ " Digite 4 para listar os Gatos" + "\n"
 					+ " Digite 5 para listaEncerrar" + "\n"
 					
-					));
+					);
+			if (questao == null) {
+				JOptionPane.showMessageDialog(null, "Obrigado. Volte sempre!");
+			}
+			if (questao.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Opcao invalida.");
+					menuInicial();
+			}
+			
+			opcao = Integer.parseInt(questao);
+		
 			
 			switch (opcao) { // Verificar o valor da variavel opcao
 			case 1: { // Caso for 1 entra nesse caso
@@ -48,10 +58,18 @@ public void menuInicial() {
 				break;
 			}
 			case 3: { 
+				if(cachorroLista.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Lista vazia para cachorro.");
+					break;
+				}
 				cadAnimal.imprimirCachorro(cachorroLista);
 				break;
 			}
 			case 4: { 
+				if(gatoLista.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Lista vazia para gato.");
+					break;
+				}
 				cadAnimal.imprimirGato(gatoLista);
 				break;
 			}
@@ -66,18 +84,6 @@ public void menuInicial() {
 			
 		}
 		
-		/*USANDO O MENU COM IF
-		if(opcao == 1) { // SE A OPÇÃO DIGITADA FOR 1
-			cadastroVeiculo.cadastrarCarro();// VAI EXECUTAR ESSA LINHA
-		}
-		if(opcao == 2) {
-			cadastroVeiculo.cadastroMoto();
-		}
-		
-		if(opcao != 1 || opcao != 2) {
-				JOptionPane.showMessageDialog(null, "Insira 1 ou 2");
-		}
-		*/
 		
 	
 		
