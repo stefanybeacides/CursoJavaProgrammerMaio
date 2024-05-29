@@ -1,0 +1,11 @@
+Cadastro de jogador de futebol e volei
+
+	Atleta
+		Nome
+		Idade
+
+	Jogador de Futebol
+		PernaMaisForte
+
+	Jogador de Volei
+		BraçoMaisForte
