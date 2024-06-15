@@ -1,0 +1,3 @@
+O nome do gerente é: Stefany
+O CPF do gerente é: 469
+A gerência do gerente é: TI

@@ -36,7 +36,7 @@ public class Menu {
 				JOptionPane.showMessageDialog(null, "Obrigado. Volte sempre!");
 			}
 			if (questao.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Opcao invalida.");
+				JOptionPane.showMessageDialog(null, "Opção invalida.");
 				menuInicial();
 			}
 
