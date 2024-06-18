@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import arquivo.ManipuladorArquivoCachorro;
 import entidade.Cachorro;
+import persistencia.DaoCachorro;
 
 public class TelaCadastroCachorroControlador implements ActionListener{
 	
@@ -16,6 +17,7 @@ public class TelaCadastroCachorroControlador implements ActionListener{
 	JTextField caixaTextoTerceiroCampoRecebidoRaca;
 	
 	ManipuladorArquivoCachorro manipuladorArquivoCachorro = new ManipuladorArquivoCachorro();
+	DaoCachorro daoCachorro = new DaoCachorro();
 	
 	
 	public TelaCadastroCachorroControlador(JTextField caixaTextoPrimeiroCampoRecebidoNome,
@@ -44,6 +46,8 @@ public class TelaCadastroCachorroControlador implements ActionListener{
 		cachorro.setRaca(caixaTextoTerceiroCampoRecebidoRaca.getText());
 		
 		manipuladorArquivoCachorro.registrarCachorro(cachorro);
+		
+		daoCachorro.salvarCachorroNoBanco(cachorro);
 		
 	}
 
