@@ -2,6 +2,9 @@ package persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import entidade.Cachorro;
 
@@ -62,6 +65,56 @@ public class DaoCachorro {
 		
 		return salvamento;
 		
+	}
+	
+	public List<Cachorro> retornoListaCachorro(){
+		
+		String comandoSqlBuscarCachorro = "select * from table_cachorro";
+		List<Cachorro> listaCachorro = new ArrayList<>();
+		FabricaConexao conexaoFabricaConexao = new FabricaConexao();
+		
+		
+		Connection connectionExemplo = null;
+		PreparedStatement preparaOComandoSQL = null;
+		ResultSet resultadoTabelaBanco = null;
+		
+		try {
+			
+			connectionExemplo = conexaoFabricaConexao.criarConexao();
+			preparaOComandoSQL = connectionExemplo.prepareStatement(comandoSqlBuscarCachorro);
+			resultadoTabelaBanco = preparaOComandoSQL.executeQuery();
+			
+			while (resultadoTabelaBanco.next()) {
+				Cachorro cachorro = new Cachorro();
+				
+				cachorro.setNome(resultadoTabelaBanco.getString("nome"));
+				cachorro.setCaf(resultadoTabelaBanco.getString("caf"));
+				cachorro.setRaca(resultadoTabelaBanco.getString("raca"));
+				
+				listaCachorro.add(cachorro);
+				
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao buscar a lista de cachorros!");
+			
+		}finally {
+			try {
+				if (connectionExemplo != null) {
+					connectionExemplo.close();
+				}
+				if (preparaOComandoSQL != null) {
+					preparaOComandoSQL.close();
+				}
+				
+			} catch (Exception e2) {
+				System.out.println("Não foi possível encerrar a conexão!");
+			}
+		}
+		
+		
+		return listaCachorro;
 	}
 
 	

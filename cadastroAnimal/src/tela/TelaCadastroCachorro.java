@@ -1,5 +1,7 @@
 package tela;
 
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,17 +14,20 @@ public class TelaCadastroCachorro {
 	
 	public void chamarTelaCadastroCachorro() {
 		
+		GridLayout grid = new GridLayout(0,1);
+		
 		String primeiroCampo = "Digite o nome do cachorro";
 		String segundoCampo = "Digite o CAF do cachorro";
 		String terceiroCampo = "Digite a raça do cachorro"; 
 		
 		JFrame frameTelaCadastroCachorro = new JFrame();
 		
-		frameTelaCadastroCachorro.setSize (200, 250);
+		frameTelaCadastroCachorro.setSize (300, 300);
 		JPanel panelTelaCadastroCachorro = new JPanel();
 		
 		JLabel labelPrimeiroCampo = new JLabel(primeiroCampo);
 		panelTelaCadastroCachorro.add(labelPrimeiroCampo);
+		panelTelaCadastroCachorro.setLayout(grid);
 		
 		JTextField caixaTextoPrimeiroCampo = new JTextField(10);
 		panelTelaCadastroCachorro.add(caixaTextoPrimeiroCampo);
@@ -48,7 +53,8 @@ public class TelaCadastroCachorro {
 		frameTelaCadastroCachorro.add(panelTelaCadastroCachorro);
 		frameTelaCadastroCachorro.setVisible(true);
 		
-		TelaCadastroCachorroControlador cadastroCachorroControlador = new TelaCadastroCachorroControlador(caixaTextoPrimeiroCampo,caixaTextoSegundoCampo,caixaTextoTerceiroCampo);
+		TelaCadastroCachorroControlador cadastroCachorroControlador = new TelaCadastroCachorroControlador(caixaTextoPrimeiroCampo,caixaTextoSegundoCampo,
+				caixaTextoTerceiroCampo, frameTelaCadastroCachorro);
 		
 		botaoCadastrar.addActionListener(cadastroCachorroControlador);
 		

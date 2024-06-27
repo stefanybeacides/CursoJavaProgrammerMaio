@@ -1,5 +1,7 @@
 package tela;
 
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,11 +17,14 @@ public void chamarTelaMenuInicial() {
 		
 		JFrame frameTelaInicial = new JFrame(); // Instanciando um JFrame vazio
 		
-		frameTelaInicial.setSize(150,200); // Altura e largura
+		GridLayout grid = new GridLayout(0, 1);
+		
+		frameTelaInicial.setSize(300,300); // Altura e largura
 		JPanel panelTelaInicial = new JPanel(); // Cria o objeto painel
 		
 		JLabel labelOpcaoCachorro = new JLabel("1 - Menu Cachorro"); // Cria a Label 1
 		panelTelaInicial.add(labelOpcaoCachorro); // Adiciona a Lable no painel
+		panelTelaInicial.setLayout(grid);
 		
 		JLabel labelOpcaoCobra = new JLabel("2 - Menu Cobra"); // Cria a Label 2
 		panelTelaInicial.add(labelOpcaoCobra); // Adiciona a Lable no painel
@@ -38,7 +43,7 @@ public void chamarTelaMenuInicial() {
 		frameTelaInicial.add(panelTelaInicial); // Adiciona o painel no frame
 		frameTelaInicial.setVisible(true); // Define a visibilidade do frame
 		
-		TelaMenuInicialControlador telaMenuInicialControlador = new TelaMenuInicialControlador(opcaoTexto);
+		TelaMenuInicialControlador telaMenuInicialControlador = new TelaMenuInicialControlador(opcaoTexto, frameTelaInicial);
 		botaoEnviar.addActionListener(telaMenuInicialControlador);
 		
 	}

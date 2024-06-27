@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -14,14 +15,24 @@ public class TelaMenuInicialControlador implements ActionListener {
 	
 	//Atributos da classe
 	JTextField opcao;
+	JFrame frameTelaInicial;
+	
 	//Telas
 	TelaMenuCachorro telaMenuCachorro = new TelaMenuCachorro();
 	TelaMenuCobra telaMenuCobra = new TelaMenuCobra();
 	
 	
-	public TelaMenuInicialControlador(JTextField opcao) {
+	
+
+
+
+	public TelaMenuInicialControlador(JTextField opcao, JFrame frameTelaInicial) {
 		this.opcao = opcao;
+		this.frameTelaInicial = frameTelaInicial;
 	}
+
+
+
 
 
 
@@ -34,6 +45,7 @@ public class TelaMenuInicialControlador implements ActionListener {
 				case "1": {
 					telaMenuCachorro.chamarTelaMenuCachorro();
 					System.out.println("Direcione para a tela do Cachorro!");
+					frameTelaInicial.setVisible(false);
 					break;
 					
 					}

@@ -1,5 +1,7 @@
 package tela;
 
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,12 +15,15 @@ public class TelaMenuCachorro {
 	public void chamarTelaMenuCachorro() {
 		
 		JFrame frameTelaMenuCachorro = new JFrame(); // Instanciando um JFrame vazio
+		
+				GridLayout grid = new GridLayout(0,1);
 				
-				frameTelaMenuCachorro.setSize(200,200); // Altura e largura
+				frameTelaMenuCachorro.setSize(300,300); // Altura e largura
 				JPanel panelTelaMenuCachorro = new JPanel(); // Cria o objeto painel
 				
 				JLabel labelOpcaoCadastroCachorro = new JLabel("CA1 - Cadastrar Cachorro"); // Cria a Label 1
 				panelTelaMenuCachorro.add(labelOpcaoCadastroCachorro); // Adiciona a Lable no painel
+				panelTelaMenuCachorro.setLayout(grid);
 				
 				JLabel labelOpcaoListarCachorro = new JLabel("CA2 - Listar Cachorro"); // Cria a Label 2
 				panelTelaMenuCachorro.add(labelOpcaoListarCachorro); // Adiciona a Lable no painel
@@ -36,7 +41,7 @@ public class TelaMenuCachorro {
 				frameTelaMenuCachorro.add(panelTelaMenuCachorro); // Adiciona o painel no frame
 				frameTelaMenuCachorro.setVisible(true);//Deixa visível
 				
-				TelaMenuCachorroControlador telaMenuCachorroControlador = new TelaMenuCachorroControlador(opcaoTexto);
+				TelaMenuCachorroControlador telaMenuCachorroControlador = new TelaMenuCachorroControlador(opcaoTexto, frameTelaMenuCachorro);
 				botaoEnviar.addActionListener(telaMenuCachorroControlador);
 				
 			}
