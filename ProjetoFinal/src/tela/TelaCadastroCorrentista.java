@@ -1,6 +1,8 @@
 package tela;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.ControllerTelaCadastroCorrentista;
+import entidade.Cep;
+import service.BuscarCep;
 
 public class TelaCadastroCorrentista {
 	
@@ -24,6 +28,7 @@ public static void chamarTelaCadastroCorrentista() {
 		String campoEmail = "Digite o email do correntista";
 		String campoQtdTransacao = "Digite a quantidade de transações";
 		String campoAnuidade = "Digite o valor da anuidade";
+		BuscarCep buscarCep = new BuscarCep();
 		
 		JFrame frameTelaCadastroCorrentista = new JFrame();
 		
@@ -97,6 +102,25 @@ public static void chamarTelaCadastroCorrentista() {
 		JButton botaoCadastrar = new JButton("Cadastrar");
 		panelTelaCadastroCorrentista.add(botaoCadastrar);
 		
+		
+	       // Adiciona um ActionListener ao JTextField
+			caixaTextoCep.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+	                String valorCep = caixaTextoCep.getText();
+	                try {
+						Cep cep = buscarCep.ConsultaCep(valorCep);
+						caixaTextoLogradouro.setText(cep.getLogradouro());
+						caixaTextoBairro.setText(cep.getBairro());
+						caixaTextoCidade.setText(cep.getLocalidade());
+						caixaTextoUf.setText(cep.getUf());
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+	        });
+			
 		
 		frameTelaCadastroCorrentista.add(panelTelaCadastroCorrentista);
 		frameTelaCadastroCorrentista.setVisible(true);
