@@ -8,19 +8,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import entidade.Correntista;
+import entidade.CorrentistaBasico;
 
 public class TelaListarCorrentistas {
 	
-public static void listarCorrentistas(List<Correntista> listaCorrentista) {
+public static void listarCorrentistas(List<CorrentistaBasico> list) {
 		
-		int qtdLinhas = listaCorrentista.size();
+		int qtdLinhas = list.size();
 		
 		String[][] tabelaString = new String [qtdLinhas] [10];
 		
 		int posicaoColuna = 0;
 		int posicaoLinha = 0;
 		
-		for (Correntista correntista : listaCorrentista) {
+		for (Correntista correntista : list) {
 			
 			tabelaString[posicaoLinha][posicaoColuna] = correntista.getNome();
 			posicaoColuna ++;

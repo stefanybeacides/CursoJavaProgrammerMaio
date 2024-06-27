@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import entidade.Cachorro;
+import entidade.Correntista;
 
 public class ControllerTelaCadastroCorrentista implements ActionListener {
 	
@@ -44,7 +48,6 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		
 		
 	}

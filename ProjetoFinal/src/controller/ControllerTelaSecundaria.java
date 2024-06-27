@@ -8,7 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import persistencia.DaoCorrentistaBasico;
 import tela.TelaCadastroCorrentista;
+import tela.TelaListarCorrentistas;
 import tela.TelaSecundaria;
 
 public class ControllerTelaSecundaria implements ActionListener{
@@ -41,7 +43,7 @@ public class ControllerTelaSecundaria implements ActionListener{
 					
 					}
 				case "2": {
-				
+					TelaListarCorrentistas.listarCorrentistas(DaoCorrentistaBasico.retornoListaCorrentista());
 					System.out.println("Direcione para a lista de correntistas!");
 					break;
 					

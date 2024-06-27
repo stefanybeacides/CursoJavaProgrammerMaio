@@ -102,8 +102,7 @@ public static void chamarTelaCadastroCorrentista() {
 		JButton botaoCadastrar = new JButton("Cadastrar");
 		panelTelaCadastroCorrentista.add(botaoCadastrar);
 		
-		
-	       // Adiciona um ActionListener ao JTextField
+	
 			caixaTextoCep.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

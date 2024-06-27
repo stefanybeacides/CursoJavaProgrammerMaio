@@ -12,21 +12,21 @@ public class BuscarCep {
 	
 	public Cep ConsultaCep (String Cep) throws Exception {
 		
-		String urlApi = "https://viacep.com.br/ws/" + Cep + "/json/" ; // URL PARA BUSCAR NA API
+		String urlApi = "https://viacep.com.br/ws/" + Cep + "/json/" ; 
 		Cep enderecoPopulado = new Cep();
 		
-		URL obj = new URL(urlApi); // CRIAR OBJETO URL COM A STRING DA URL DA API
+		URL obj = new URL(urlApi); 
 		
-		HttpURLConnection con = (HttpURLConnection)obj.openConnection(); // ABRE CONEXÃO COM SERVIDOR DA API
+		HttpURLConnection con = (HttpURLConnection)obj.openConnection(); 
 		
-		con.setRequestMethod("GET"); // É UM METODO HTTP PARA CONSULTA
+		con.setRequestMethod("GET"); 
 		
-		int statusRespostaApi = con.getResponseCode();// RECEBE O STATUS HTTP DA RESPOSTA DA API 200 OU 400
+		int statusRespostaApi = con.getResponseCode();
 		
 		if(statusRespostaApi == HttpURLConnection.HTTP_OK) {
-			BufferedReader dadosEntradaDaApi = new BufferedReader(new InputStreamReader(con.getInputStream()));// Armazena toda resposta do servidor no objeto dadosEntradaDaApi
-			String linhaEntrada; // String temporaria para montar o string StringBuffer
-			StringBuffer respostaDaApi = new StringBuffer(); // String buffer que será montada durante a leitura do json
+			BufferedReader dadosEntradaDaApi = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String linhaEntrada; 
+			StringBuffer respostaDaApi = new StringBuffer(); 
 			
 			while ((linhaEntrada = dadosEntradaDaApi.readLine()) != null) {
 				respostaDaApi.append(linhaEntrada);
