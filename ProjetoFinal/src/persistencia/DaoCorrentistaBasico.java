@@ -6,12 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidade.Correntista;
 import entidade.CorrentistaBasico;
 
 public class DaoCorrentistaBasico {
-	
-	public class DaoCachorro {
 		
 		public boolean salvarCorrentistaNoBanco(CorrentistaBasico correntista) {
 			boolean salvamento = false;
@@ -34,8 +31,8 @@ public class DaoCorrentistaBasico {
 				preparaOComandoSQL.setString(6, correntista.getCidade());
 				preparaOComandoSQL.setString(7, correntista.getUf());
 				preparaOComandoSQL.setString(8, correntista.getEmail());
-				preparaOComandoSQL.setString(9, correntista.getQtdTransacao());
-				preparaOComandoSQL.setString(10, correntista.getValorAnuidade());
+				preparaOComandoSQL.setInt(9, correntista.getQtdTransacao());
+				preparaOComandoSQL.setDouble(10, correntista.getValorAnuidade());
 				
 				preparaOComandoSQL.execute(); 
 
@@ -74,10 +71,10 @@ public class DaoCorrentistaBasico {
 			
 		}
 
-}
 
 	public static List<CorrentistaBasico> retornoListaCorrentista() {
-		String comandoSqlBuscarCorrentista = "select * from correntista_basico";
+		
+		String comandoSqlBuscarCorrentista = "SELECT * FROM correntista_basico";
 		List<CorrentistaBasico> listaCorrentista = new ArrayList<>();
 		FabricaConexao conexaoFabricaConexao = new FabricaConexao();
 		
@@ -103,8 +100,8 @@ public class DaoCorrentistaBasico {
 				correntista.setCidade(resultadoTabelaBanco.getString("cidade"));
 				correntista.setUf(resultadoTabelaBanco.getString("uf"));
 				correntista.setEmail(resultadoTabelaBanco.getString("email"));
-				correntista.setQtdTransacao(resultadoTabelaBanco.getString("qtd transação"));
-				correntista.setValorAnuidade(resultadoTabelaBanco.getString("valor anuidade"));
+				correntista.setQtdTransacao(resultadoTabelaBanco.getInt("qtdtransacao"));
+				correntista.setValorAnuidade(resultadoTabelaBanco.getDouble("anuidade"));
 				
 				listaCorrentista.add(correntista);
 				
@@ -112,7 +109,8 @@ public class DaoCorrentistaBasico {
 			
 			
 		} catch (Exception e) {
-			System.out.println("Erro ao buscar a lista de correntistas!");
+			System.out.println("Erro ao buscar a lista de correntistas!" + e.getMessage());
+			e.printStackTrace();
 			
 		}finally {
 			try {
@@ -124,7 +122,9 @@ public class DaoCorrentistaBasico {
 				}
 				
 			} catch (Exception e2) {
-				System.out.println("Não foi possível encerrar a conexão!");
+				System.out.println("Não foi possível encerrar a conexão!" + e2.getMessage());
+				e2.printStackTrace();
+				
 			}
 		}
 		

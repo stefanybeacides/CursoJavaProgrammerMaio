@@ -1,6 +1,8 @@
 package tela;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,11 +45,28 @@ public static void chamarTelaMenuSecundario() {
 		JButton botaoEnviar = new JButton("Enviar");
 		panelTelaSecundaria.add(botaoEnviar);
 		
+		JButton botaoVoltar = new JButton("Voltar");
+		panelTelaSecundaria.add(botaoVoltar);
+		
+		botaoVoltar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+                try {
+                	TelaInicial inicial  = new TelaInicial();
+                	frameTelaSecundaria.setVisible(false);
+                	inicial.chamarTelaMenuInicial();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+        });
+		
 		
 		frameTelaSecundaria.add(panelTelaSecundaria);
 		frameTelaSecundaria.setVisible(true);
 		
-		ControllerTelaSecundaria controllerTelaSecundaria = new ControllerTelaSecundaria(frameTelaSecundaria, opcaoTexto, botaoEnviar);
+		ControllerTelaSecundaria controllerTelaSecundaria = new ControllerTelaSecundaria(frameTelaSecundaria, opcaoTexto, botaoEnviar, botaoVoltar);
 		botaoEnviar.addActionListener(controllerTelaSecundaria);
 		
 	}

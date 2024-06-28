@@ -10,8 +10,9 @@ public abstract class Correntista {
 	private String Cidade;
 	private String Uf;
 	private String Email;
-	private String QtdTransacao;
-	private String ValorAnuidade;
+	private int QtdTransacao;
+	private Double ValorAnuidade;
+	private String Tabela;
 	
 	
 	public String getNome() {
@@ -62,18 +63,25 @@ public abstract class Correntista {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public String getQtdTransacao() {
+	public int getQtdTransacao() {
 		return QtdTransacao;
 	}
-	public void setQtdTransacao(String qtdTransacao) {
+	public void setQtdTransacao(int qtdTransacao) {
 		QtdTransacao = qtdTransacao;
 	}
-	public String getValorAnuidade() {
+	public double getValorAnuidade() {
 		return ValorAnuidade;
 	}
-	public void setValorAnuidade(String valorAnuidade) {
+	public void setValorAnuidade(Double valorAnuidade) {
 		ValorAnuidade = valorAnuidade;
 	}
+	public String getTabela() {
+		return Tabela;
+	}
+	public void setTabela(String tabela) {
+		Tabela = tabela;
+	}
+	
 	
 	
 	

@@ -33,8 +33,8 @@ public class DaoCachorro {
 				preparaOComandoSQL.setString(6, correntista.getCidade());
 				preparaOComandoSQL.setString(7, correntista.getUf());
 				preparaOComandoSQL.setString(8, correntista.getEmail());
-				preparaOComandoSQL.setString(9, correntista.getQtdTransacao());
-				preparaOComandoSQL.setString(10, correntista.getValorAnuidade());
+				preparaOComandoSQL.setInt(9, correntista.getQtdTransacao());
+				preparaOComandoSQL.setDouble(10, correntista.getValorAnuidade());
 				
 				preparaOComandoSQL.execute(); 
 
@@ -102,8 +102,8 @@ public class DaoCachorro {
 				correntista.setCidade(resultadoTabelaBanco.getString("cidade"));
 				correntista.setUf(resultadoTabelaBanco.getString("uf"));
 				correntista.setEmail(resultadoTabelaBanco.getString("email"));
-				correntista.setQtdTransacao(resultadoTabelaBanco.getString("qtd transação"));
-				correntista.setValorAnuidade(resultadoTabelaBanco.getString("valor anuidade"));
+				correntista.setQtdTransacao(resultadoTabelaBanco.getInt("qtd transação"));
+				correntista.setValorAnuidade(resultadoTabelaBanco.getDouble("valor anuidade"));
 				
 				listaCorrentista.add(correntista);
 				

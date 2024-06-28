@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import entidade.Correntista;
 import entidade.CorrentistaBasico;
 
-public class TelaListarCorrentistas {
-	
-public static void listarCorrentistas(List<CorrentistaBasico> list) {
+public class EditarCorrentista {
+	/*
+public static void editarCorrentista(Correntista correntista) {
 		
 		int qtdLinhas = list.size();
 		
@@ -77,7 +77,7 @@ public static void listarCorrentistas(List<CorrentistaBasico> list) {
 		
 		frameListarCorrentista.setVisible(true);
 		
-	}
+	} */
 		
 	}
 

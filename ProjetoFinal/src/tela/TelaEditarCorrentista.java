@@ -10,13 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.ControllerTelaCadastroCorrentista;
+import controller.ControllerTelaEditarCorrentista;
 import entidade.Cep;
+import entidade.Correntista;
 import service.BuscarCep;
 
-public class TelaCadastroCorrentista {
+public class TelaEditarCorrentista {
 	
-public static void chamarTelaCadastroCorrentista() {
+public static void chamarTelaEditarCorrentista(Correntista correntista) {
 		
 		String campoNome = "Digite o nome do correntista";
 		String campoCpf = "Digite o CPF do correntista";
@@ -30,80 +31,90 @@ public static void chamarTelaCadastroCorrentista() {
 		String campoAnuidade = "Digite o valor da anuidade";
 		BuscarCep buscarCep = new BuscarCep();
 		
-		JFrame frameTelaCadastroCorrentista = new JFrame();
+		JFrame frameTelaEditarCorrentista = new JFrame();
 		
 		GridLayout grid = new GridLayout(0, 1);
 		
-		frameTelaCadastroCorrentista.setSize (350, 600);
-		JPanel panelTelaCadastroCorrentista = new JPanel();
+		frameTelaEditarCorrentista.setSize (350, 600);
+		JPanel panelTelaEditarCorrentista = new JPanel();
 		
 		JLabel labelCampoNome = new JLabel(campoNome);
-		panelTelaCadastroCorrentista.add(labelCampoNome);
-		panelTelaCadastroCorrentista.setLayout(grid);
+		panelTelaEditarCorrentista.add(labelCampoNome);
+		panelTelaEditarCorrentista.setLayout(grid);
 		
 		JTextField caixaTextoNome = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoNome);
+		caixaTextoNome.setText(correntista.getNome());
+		panelTelaEditarCorrentista.add(caixaTextoNome);
 		
 		
 		JLabel labelCampoCpf = new JLabel(campoCpf);
-		panelTelaCadastroCorrentista.add(labelCampoCpf);
+		panelTelaEditarCorrentista.add(labelCampoCpf);
 		
 		JTextField caixaTextoCpf = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoCpf);
+		caixaTextoCpf.setText(correntista.getCpf());
+		panelTelaEditarCorrentista.add(caixaTextoCpf);
 		
 		JLabel labelCampoCep = new JLabel(campoCep);
-		panelTelaCadastroCorrentista.add(labelCampoCep);
+		panelTelaEditarCorrentista.add(labelCampoCep);
 		
 		JTextField caixaTextoCep = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoCep);
+		caixaTextoCep.setText(correntista.getCep());
+		panelTelaEditarCorrentista.add(caixaTextoCep);
 		
 		JLabel labelCampoLogradouro = new JLabel(campoLogradouro);
-		panelTelaCadastroCorrentista.add(labelCampoLogradouro);
+		panelTelaEditarCorrentista.add(labelCampoLogradouro);
 		
 		JTextField caixaTextoLogradouro = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoLogradouro);
+		caixaTextoLogradouro.setText(correntista.getLogradouro());
+		panelTelaEditarCorrentista.add(caixaTextoLogradouro);
 		
 		JLabel labelCampoBairro = new JLabel(campoBairro);
-		panelTelaCadastroCorrentista.add(labelCampoBairro);
+		panelTelaEditarCorrentista.add(labelCampoBairro);
 		
 		JTextField caixaTextoBairro = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoBairro);
+		caixaTextoBairro.setText(correntista.getBairro());
+		panelTelaEditarCorrentista.add(caixaTextoBairro);
 		
 		JLabel labelCampoCidade = new JLabel(campoCidade);
-		panelTelaCadastroCorrentista.add(labelCampoCidade);
+		panelTelaEditarCorrentista.add(labelCampoCidade);
 		
 		JTextField caixaTextoCidade = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoCidade);
+		caixaTextoCidade.setText(correntista.getCidade());
+		panelTelaEditarCorrentista.add(caixaTextoCidade);
 		
 		JLabel labelCampoUf = new JLabel(campoUf);
-		panelTelaCadastroCorrentista.add(labelCampoUf);
+		panelTelaEditarCorrentista.add(labelCampoUf);
 		
 		JTextField caixaTextoUf = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoUf);
+		caixaTextoUf.setText(correntista.getUf());
+		panelTelaEditarCorrentista.add(caixaTextoUf);
 		
 		JLabel labelCampoEmail = new JLabel(campoEmail);
-		panelTelaCadastroCorrentista.add(labelCampoEmail);
+		panelTelaEditarCorrentista.add(labelCampoEmail);
 		
 		JTextField caixaTextoEmail = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoEmail);
+		caixaTextoEmail.setText(correntista.getEmail());
+		panelTelaEditarCorrentista.add(caixaTextoEmail);
 		
 		JLabel labelCampoQtdTransacao = new JLabel(campoQtdTransacao);
-		panelTelaCadastroCorrentista.add(labelCampoQtdTransacao);
+		panelTelaEditarCorrentista.add(labelCampoQtdTransacao);
 		
 		JTextField caixaTextoQtdTransacao = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoQtdTransacao);
+		caixaTextoQtdTransacao.setText(Integer.toString(correntista.getQtdTransacao()));
+		panelTelaEditarCorrentista.add(caixaTextoQtdTransacao);
 		
 		JLabel labelCampoAnuidade = new JLabel(campoAnuidade);
-		panelTelaCadastroCorrentista.add(labelCampoAnuidade);
+		panelTelaEditarCorrentista.add(labelCampoAnuidade);
 		
 		JTextField caixaTextoAnuidade = new JTextField(10);
-		panelTelaCadastroCorrentista.add(caixaTextoAnuidade);
+		caixaTextoAnuidade.setText(Double.toString(correntista.getValorAnuidade()));
+		panelTelaEditarCorrentista.add(caixaTextoAnuidade);
 		
-		JButton botaoCadastrar = new JButton("Cadastrar");
-		panelTelaCadastroCorrentista.add(botaoCadastrar);
+		JButton botaoAtualizar = new JButton("Atualizar");
+		panelTelaEditarCorrentista.add(botaoAtualizar);
 		
 		JButton botaoVoltar = new JButton("Voltar");
-		panelTelaCadastroCorrentista.add(botaoVoltar);
+		panelTelaEditarCorrentista.add(botaoVoltar);
 		
 	
 			caixaTextoCep.addActionListener(new ActionListener() {
@@ -129,8 +140,8 @@ public static void chamarTelaCadastroCorrentista() {
 				public void actionPerformed(ActionEvent e) {
 	                try {
 	                	TelaSecundaria secundaria  = new TelaSecundaria();
-	                	frameTelaCadastroCorrentista.setVisible(false);
-	                	secundaria.chamarTelaMenuSecundario();
+	                	frameTelaEditarCorrentista.setVisible(false);
+	                	TelaSecundaria.chamarTelaMenuSecundario();
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -138,14 +149,14 @@ public static void chamarTelaCadastroCorrentista() {
 				}
 	        });
 		
-		frameTelaCadastroCorrentista.add(panelTelaCadastroCorrentista);
-		frameTelaCadastroCorrentista.setVisible(true);
+		frameTelaEditarCorrentista.add(panelTelaEditarCorrentista);
+		frameTelaEditarCorrentista.setVisible(true);
 		
-		ControllerTelaCadastroCorrentista controllerCadastroCorrentista = new ControllerTelaCadastroCorrentista(caixaTextoNome,caixaTextoCpf,
+		ControllerTelaEditarCorrentista controllerEditarCorrentista = new ControllerTelaEditarCorrentista(caixaTextoNome,caixaTextoCpf,
 				caixaTextoCep, caixaTextoLogradouro, caixaTextoBairro, caixaTextoCidade, caixaTextoUf, caixaTextoEmail, caixaTextoQtdTransacao, 
-				caixaTextoAnuidade, frameTelaCadastroCorrentista, botaoCadastrar, botaoVoltar);
+				caixaTextoAnuidade, correntista.getTabela(), frameTelaEditarCorrentista, botaoAtualizar, botaoVoltar);
 		
-		botaoCadastrar.addActionListener(controllerCadastroCorrentista); 
+		botaoAtualizar.addActionListener(controllerEditarCorrentista); 
 		
 		
 	}

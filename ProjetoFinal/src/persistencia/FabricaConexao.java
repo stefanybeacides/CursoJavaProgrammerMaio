@@ -18,12 +18,18 @@ public class FabricaConexao {
 			
 			conexaoBancoDados = DriverManager.getConnection(BANCO_URL,USUARIO,SENHA);
 			
-			System.out.println("Deu certo!");
+			System.out.println("A conexão deu certo!");
 			
+			
+		} catch (ClassNotFoundException e) {
+			
+			System.out.println("Driver do banco de dados não encontrado!");
+			e.printStackTrace();
 			
 		} catch (Exception e) {
 			
-			System.out.println("Deu errado!");
+			System.out.println("A conexão deu errado!");
+			e.printStackTrace();
 			
 		}
 		

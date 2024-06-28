@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import entidade.CorrentistaBasico;
-import persistencia.DaoCorrentistaBasico;
+import persistencia.DaoCorrentista;
 
-public class ControllerTelaCadastroCorrentista implements ActionListener {
+public class ControllerTelaEditarCorrentista implements ActionListener {
 	
 	JTextField caixaTextoRecebidoNome;
 	JTextField caixaTextoRecebidoCpf;
@@ -23,17 +23,19 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	JTextField caixaTextoRecebidoEmail;
 	JTextField caixaTextoRecebidoQtd;
 	JTextField caixaTextoRecebidoAnuidade;
+	String table;
 	JFrame frameTelaCadastroCorrentista;
-	JButton botaoCadastrar;
+	JButton botaoAtualizar;
 	JButton botaoVoltar;
 	
 	
 	
-	public ControllerTelaCadastroCorrentista(JTextField caixaTextoRecebidoNome, JTextField caixaTextoRecebidoCpf,
+	public ControllerTelaEditarCorrentista(JTextField caixaTextoRecebidoNome, JTextField caixaTextoRecebidoCpf,
 			JTextField caixaTextoRecebidoCep, JTextField caixaTextoRecebidoLogradouro,
 			JTextField caixaTextoRecebidoBairro, JTextField caixaTextoRecebidoCidade, JTextField caixaTextoRecebidoUf,
 			JTextField caixaTextoRecebidoEmail, JTextField caixaTextoRecebidoQtd, JTextField caixaTextoRecebidoAnuidade,
-			JFrame frameTelaCadastroCorrentista, JButton botaoCadastrar, JButton botaoVoltar) {
+			String tabela,
+			JFrame frameTelaCadastroCorrentista, JButton botaoAtualizar, JButton botaoVoltar) {
 		this.caixaTextoRecebidoNome = caixaTextoRecebidoNome;
 		this.caixaTextoRecebidoCpf = caixaTextoRecebidoCpf;
 		this.caixaTextoRecebidoCep = caixaTextoRecebidoCep;
@@ -44,8 +46,9 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 		this.caixaTextoRecebidoEmail = caixaTextoRecebidoEmail;
 		this.caixaTextoRecebidoQtd = caixaTextoRecebidoQtd;
 		this.caixaTextoRecebidoAnuidade = caixaTextoRecebidoAnuidade;
+		this.table = tabela;
 		this.frameTelaCadastroCorrentista = frameTelaCadastroCorrentista;
-		this.botaoCadastrar = botaoCadastrar;
+		this.botaoAtualizar = botaoAtualizar;
 		this.botaoVoltar = botaoVoltar;
 	}
 
@@ -53,9 +56,9 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		 if (e.getSource() == botaoCadastrar) {
+		 if (e.getSource() == botaoAtualizar) {
 			 CorrentistaBasico correntista = new CorrentistaBasico();
-			 DaoCorrentistaBasico dao = new DaoCorrentistaBasico();
+			 DaoCorrentista dao = new DaoCorrentista();
 			 
 	            correntista.setNome(caixaTextoRecebidoNome.getText()); 
 	            correntista.setCpf(caixaTextoRecebidoCpf.getText()); 
@@ -67,11 +70,12 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	            correntista.setEmail(caixaTextoRecebidoEmail.getText());
 	            correntista.setQtdTransacao(Integer.parseInt(caixaTextoRecebidoQtd.getText()));
 	            correntista.setValorAnuidade(Double.parseDouble(caixaTextoRecebidoAnuidade.getText()));
+	            correntista.setTabela(table);
 
 
-	            boolean sucesso = dao.salvarCorrentistaNoBanco(correntista);
+	            boolean sucesso = dao.atualizarCorrentistaNoBanco(correntista);
 	            if (sucesso) {
-	                JOptionPane.showMessageDialog(frameTelaCadastroCorrentista, "Cadastro realizado com sucesso!");
+	                JOptionPane.showMessageDialog(frameTelaCadastroCorrentista, "Cadastro atualizado com sucesso!");
 	                limparCampos();
 	            } else {
 	                JOptionPane.showMessageDialog(frameTelaCadastroCorrentista, "Erro ao realizar cadastro!");

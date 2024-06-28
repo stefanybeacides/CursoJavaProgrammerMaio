@@ -8,8 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import entidade.Correntista;
+import persistencia.DaoCorrentista;
 import persistencia.DaoCorrentistaBasico;
 import tela.TelaCadastroCorrentista;
+import tela.TelaEditarCorrentista;
 import tela.TelaListarCorrentistas;
 import tela.TelaSecundaria;
 
@@ -18,16 +21,21 @@ public class ControllerTelaSecundaria implements ActionListener{
 	JFrame frameTelaSecundaria;
 	JTextField opcao;
 	JButton botaoEnviar;
+	JButton botaoVoltar;
 	
 	
 	TelaSecundaria telaSecundaria = new TelaSecundaria();
-	
+	DaoCorrentista correntistaBuscar = new DaoCorrentista();
 
-	public ControllerTelaSecundaria(JFrame frameTelaSecundaria, JTextField opcao, JButton botaoEnviar) {
+
+	public ControllerTelaSecundaria(JFrame frameTelaSecundaria, JTextField opcao, JButton botaoEnviar,
+			JButton botaoVoltar) {
 		this.frameTelaSecundaria = frameTelaSecundaria;
 		this.opcao = opcao;
 		this.botaoEnviar = botaoEnviar;
+		this.botaoVoltar = botaoVoltar;
 	}
+
 
 
 	@Override
@@ -49,6 +57,15 @@ public class ControllerTelaSecundaria implements ActionListener{
 					
 					}
 				case "3": {
+					String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do correntista que deseja editar: ");
+					Correntista correntista = null;
+					if (!cpf.isEmpty()) {
+						correntista =  correntistaBuscar.buscarCorrentista(cpf);
+					}else {
+						JOptionPane.showMessageDialog(null, "Campo CPF Vazio");
+
+					}
+					TelaEditarCorrentista.chamarTelaEditarCorrentista(correntista);
 					
 					System.out.println("Edite correntista!");
 					break;
