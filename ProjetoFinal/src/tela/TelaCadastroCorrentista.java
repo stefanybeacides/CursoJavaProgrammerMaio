@@ -16,7 +16,7 @@ import service.BuscarCep;
 
 public class TelaCadastroCorrentista {
 	
-public static void chamarTelaCadastroCorrentista() {
+public static void chamarTelaCadastroCorrentista(String correntista) {
 		
 		String campoNome = "Digite o nome do correntista";
 		String campoCpf = "Digite o CPF do correntista";
@@ -130,7 +130,7 @@ public static void chamarTelaCadastroCorrentista() {
 	                try {
 	                	TelaSecundaria secundaria  = new TelaSecundaria();
 	                	frameTelaCadastroCorrentista.setVisible(false);
-	                	secundaria.chamarTelaMenuSecundario();
+	                	secundaria.chamarTelaMenuSecundario(correntista);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -143,7 +143,7 @@ public static void chamarTelaCadastroCorrentista() {
 		
 		ControllerTelaCadastroCorrentista controllerCadastroCorrentista = new ControllerTelaCadastroCorrentista(caixaTextoNome,caixaTextoCpf,
 				caixaTextoCep, caixaTextoLogradouro, caixaTextoBairro, caixaTextoCidade, caixaTextoUf, caixaTextoEmail, caixaTextoQtdTransacao, 
-				caixaTextoAnuidade, frameTelaCadastroCorrentista, botaoCadastrar, botaoVoltar);
+				caixaTextoAnuidade, correntista, frameTelaCadastroCorrentista, botaoCadastrar, botaoVoltar);
 		
 		botaoCadastrar.addActionListener(controllerCadastroCorrentista); 
 		

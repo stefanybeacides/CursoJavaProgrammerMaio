@@ -141,7 +141,7 @@ public static void chamarTelaEditarCorrentista(Correntista correntista) {
 	                try {
 	                	TelaSecundaria secundaria  = new TelaSecundaria();
 	                	frameTelaEditarCorrentista.setVisible(false);
-	                	TelaSecundaria.chamarTelaMenuSecundario();
+	                	TelaSecundaria.chamarTelaMenuSecundario(correntista.getTabela());
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}

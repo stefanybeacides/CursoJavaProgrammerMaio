@@ -1,18 +1,22 @@
 package tela;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import arquivo.ManipuladorArquivo;
 import entidade.Correntista;
 import entidade.CorrentistaBasico;
 
 public class TelaListarCorrentistas {
 	
-public static void listarCorrentistas(List<CorrentistaBasico> list) {
+public static void listarCorrentistas(List<Correntista> list) {
 		
 		int qtdLinhas = list.size();
 		
@@ -65,6 +69,8 @@ public static void listarCorrentistas(List<CorrentistaBasico> list) {
 		
 		JTable tabelaCorrentista = new JTable(tabelaString, nomeColunas);
 		
+	
+		
 		tabelaCorrentista.setBounds(30, 40, 300, 300);
 		
 		JScrollPane scrollPaneListarCorrentista = new JScrollPane(tabelaCorrentista);
@@ -74,6 +80,25 @@ public static void listarCorrentistas(List<CorrentistaBasico> list) {
 		panelListarCorrentista.add(scrollPaneListarCorrentista);
 		
 		frameListarCorrentista.add(panelListarCorrentista);
+		
+		JButton gerarPDF = new JButton("Gerar PDF Detalhado");
+		panelListarCorrentista.add(gerarPDF);
+		
+		gerarPDF.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+                try {
+                	ManipuladorArquivo manipuladorArquivo = new ManipuladorArquivo();
+                	manipuladorArquivo.gerarPdfCorrentista(list);
+                	TelaSecundaria secundaria  = new TelaSecundaria();
+                	frameListarCorrentista.setVisible(false);
+                	TelaSecundaria.chamarTelaMenuSecundario(list.get(0).getTabela());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+        });
 		
 		frameListarCorrentista.setVisible(true);
 		

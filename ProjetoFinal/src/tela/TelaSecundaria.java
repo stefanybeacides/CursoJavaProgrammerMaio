@@ -14,7 +14,7 @@ import controller.ControllerTelaSecundaria;
 
 public class TelaSecundaria {
 	
-public static void chamarTelaMenuSecundario() {
+public static void chamarTelaMenuSecundario(String correntista) {
 		
 		JFrame frameTelaSecundaria = new JFrame(); 
 		
@@ -66,7 +66,7 @@ public static void chamarTelaMenuSecundario() {
 		frameTelaSecundaria.add(panelTelaSecundaria);
 		frameTelaSecundaria.setVisible(true);
 		
-		ControllerTelaSecundaria controllerTelaSecundaria = new ControllerTelaSecundaria(frameTelaSecundaria, opcaoTexto, botaoEnviar, botaoVoltar);
+		ControllerTelaSecundaria controllerTelaSecundaria = new ControllerTelaSecundaria(frameTelaSecundaria, opcaoTexto, correntista, botaoEnviar, botaoVoltar);
 		botaoEnviar.addActionListener(controllerTelaSecundaria);
 		
 	}

@@ -22,18 +22,20 @@ public class ControllerTelaSecundaria implements ActionListener{
 	JTextField opcao;
 	JButton botaoEnviar;
 	JButton botaoVoltar;
+	String tipoCorrentista;
 	
 	
 	TelaSecundaria telaSecundaria = new TelaSecundaria();
 	DaoCorrentista correntistaBuscar = new DaoCorrentista();
 
 
-	public ControllerTelaSecundaria(JFrame frameTelaSecundaria, JTextField opcao, JButton botaoEnviar,
+	public ControllerTelaSecundaria(JFrame frameTelaSecundaria,  JTextField opcao, String correntista, JButton botaoEnviar,
 			JButton botaoVoltar) {
 		this.frameTelaSecundaria = frameTelaSecundaria;
 		this.opcao = opcao;
 		this.botaoEnviar = botaoEnviar;
 		this.botaoVoltar = botaoVoltar;
+		this.tipoCorrentista = correntista;
 	}
 
 
@@ -44,14 +46,14 @@ public class ControllerTelaSecundaria implements ActionListener{
 		if(opcao.getText().equals("1") || opcao.getText().equals("2") || opcao.getText().equals("3") || opcao.getText().equals("4") || opcao.getText().equals("5")) {
 			switch (opcao.getText()) {
 				case "1": {
-					TelaCadastroCorrentista.chamarTelaCadastroCorrentista();
+					TelaCadastroCorrentista.chamarTelaCadastroCorrentista(tipoCorrentista);
 					System.out.println("Direcione para o menu secundário!");
 					frameTelaSecundaria.setVisible(false);
 					break;
 					
 					}
 				case "2": {
-					TelaListarCorrentistas.listarCorrentistas(DaoCorrentistaBasico.retornoListaCorrentista());
+					TelaListarCorrentistas.listarCorrentistas(DaoCorrentistaBasico.retornoListaCorrentista(tipoCorrentista));
 					System.out.println("Direcione para a lista de correntistas!");
 					break;
 					
@@ -61,18 +63,33 @@ public class ControllerTelaSecundaria implements ActionListener{
 					Correntista correntista = null;
 					if (!cpf.isEmpty()) {
 						correntista =  correntistaBuscar.buscarCorrentista(cpf);
+						TelaEditarCorrentista.chamarTelaEditarCorrentista(correntista);
+
 					}else {
 						JOptionPane.showMessageDialog(null, "Campo CPF Vazio");
 
 					}
-					TelaEditarCorrentista.chamarTelaEditarCorrentista(correntista);
 					
 					System.out.println("Edite correntista!");
 					break;
 					
 					}
 				case "4": {
-					
+					String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do correntista que deseja deletar: ");
+					Correntista correntista = null;
+					if (!cpf.isEmpty()) {
+						correntista =  correntistaBuscar.buscarCorrentista(cpf);
+						int confirma = JOptionPane.showConfirmDialog(null, "Confirme se é este correntista que deseja deletar: \n" + correntista.getCpf() + "\n" + correntista.getNome());
+						if(confirma == 0) {
+							correntistaBuscar.deletarCorrentistaNoBanco(correntista);
+							JOptionPane.showMessageDialog(null, "Correntista deletado.");
+						}else {
+							JOptionPane.showMessageDialog(null, "Você não confirmou a deleção. Retornando ao menu.");
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "Campo CPF Vazio");
+
+					}
 					System.out.println("Delete correntista!");
 					break;
 					

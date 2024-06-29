@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import entidade.Correntista;
 import entidade.CorrentistaBasico;
 
 public class DaoCorrentistaBasico {
@@ -17,7 +18,7 @@ public class DaoCorrentistaBasico {
 			Connection connectionCorrentistaBasico = null; 
 			PreparedStatement preparaOComandoSQL = null; 
 			
-			String comandoSqlInsert = "insert into correntista_basico (nome, cpf, cep, logradouro, bairro, cidade, uf, email, qtdtransacao, anuidade) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String comandoSqlInsert = "insert into " + correntista.getTabela() + " (nome, cpf, cep, logradouro, bairro, cidade, uf, email, qtdtransacao, anuidade) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			try {
 				connectionCorrentistaBasico = conexaoFabricaConexao.criarConexao(); 
 				
@@ -72,10 +73,10 @@ public class DaoCorrentistaBasico {
 		}
 
 
-	public static List<CorrentistaBasico> retornoListaCorrentista() {
+	public static List<Correntista> retornoListaCorrentista(String tipoCorrentista) {
 		
-		String comandoSqlBuscarCorrentista = "SELECT * FROM correntista_basico";
-		List<CorrentistaBasico> listaCorrentista = new ArrayList<>();
+		String comandoSqlBuscarCorrentista = "SELECT * FROM " + tipoCorrentista;
+		List<Correntista> listaCorrentista = new ArrayList<>();
 		FabricaConexao conexaoFabricaConexao = new FabricaConexao();
 		
 		
@@ -90,7 +91,8 @@ public class DaoCorrentistaBasico {
 			resultadoTabelaBanco = preparaOComandoSQL.executeQuery();
 			
 			while (resultadoTabelaBanco.next()) {
-				CorrentistaBasico correntista = new CorrentistaBasico();
+				Correntista correntista = new Correntista() {
+				};
 				
 				correntista.setNome(resultadoTabelaBanco.getString("nome"));
 				correntista.setCpf(resultadoTabelaBanco.getString("cpf"));

@@ -149,6 +149,55 @@ public class DaoCorrentista {
 			return salvamento;
 			
 		}
+		
+		
+		public boolean deletarCorrentistaNoBanco(Correntista correntista) {
+			boolean salvamento = false;
+			
+			FabricaConexao conexaoFabricaConexao = new FabricaConexao(); 
+			Connection connectionCorrentista = null; 
+			PreparedStatement preparaOComandoSQL = null; 
+			
+			String comandoSqlDelete = "DELETE FROM `cadastro_correntistas`.`"+correntista.getTabela()+"` WHERE cpf = "+correntista.getCpf()+" ;";
+			try {
+				connectionCorrentista = conexaoFabricaConexao.criarConexao(); 
+				preparaOComandoSQL = connectionCorrentista.prepareStatement(comandoSqlDelete); 
+				preparaOComandoSQL.executeUpdate(); 
+
+				
+				System.out.println("Correntista deletado com sucesso!");
+				
+				salvamento = true; 
+				
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("Erro ao deletar correntista!");
+				
+			}finally { 
+				try {
+					if (connectionCorrentista != null) {
+						connectionCorrentista.close(); 
+				
+					}
+					if (preparaOComandoSQL != null) {
+						preparaOComandoSQL.close(); 
+				
+					}
+					
+					
+					
+				} catch (Exception e2) {
+					System.out.println("Não foi possível encerrar a conexão!");
+					
+				}
+				
+			}
+			
+			
+			return salvamento;
+			
+		}
 
 
 }

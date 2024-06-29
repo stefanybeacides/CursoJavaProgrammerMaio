@@ -8,7 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import entidade.Correntista;
 import entidade.CorrentistaBasico;
+import persistencia.DaoCorrentista;
 import persistencia.DaoCorrentistaBasico;
 
 public class ControllerTelaCadastroCorrentista implements ActionListener {
@@ -23,6 +25,7 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	JTextField caixaTextoRecebidoEmail;
 	JTextField caixaTextoRecebidoQtd;
 	JTextField caixaTextoRecebidoAnuidade;
+	String tipoCorrentista;
 	JFrame frameTelaCadastroCorrentista;
 	JButton botaoCadastrar;
 	JButton botaoVoltar;
@@ -32,7 +35,7 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	public ControllerTelaCadastroCorrentista(JTextField caixaTextoRecebidoNome, JTextField caixaTextoRecebidoCpf,
 			JTextField caixaTextoRecebidoCep, JTextField caixaTextoRecebidoLogradouro,
 			JTextField caixaTextoRecebidoBairro, JTextField caixaTextoRecebidoCidade, JTextField caixaTextoRecebidoUf,
-			JTextField caixaTextoRecebidoEmail, JTextField caixaTextoRecebidoQtd, JTextField caixaTextoRecebidoAnuidade,
+			JTextField caixaTextoRecebidoEmail, JTextField caixaTextoRecebidoQtd, JTextField caixaTextoRecebidoAnuidade, String correntista,
 			JFrame frameTelaCadastroCorrentista, JButton botaoCadastrar, JButton botaoVoltar) {
 		this.caixaTextoRecebidoNome = caixaTextoRecebidoNome;
 		this.caixaTextoRecebidoCpf = caixaTextoRecebidoCpf;
@@ -45,6 +48,7 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 		this.caixaTextoRecebidoQtd = caixaTextoRecebidoQtd;
 		this.caixaTextoRecebidoAnuidade = caixaTextoRecebidoAnuidade;
 		this.frameTelaCadastroCorrentista = frameTelaCadastroCorrentista;
+		this.tipoCorrentista = correntista;
 		this.botaoCadastrar = botaoCadastrar;
 		this.botaoVoltar = botaoVoltar;
 	}
@@ -56,6 +60,10 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 		 if (e.getSource() == botaoCadastrar) {
 			 CorrentistaBasico correntista = new CorrentistaBasico();
 			 DaoCorrentistaBasico dao = new DaoCorrentistaBasico();
+			 DaoCorrentista daoCorrentista = new DaoCorrentista();
+			 Correntista correntista2 = daoCorrentista.buscarCorrentista(caixaTextoRecebidoCpf.getText());
+			 
+			 if (correntista2 == null) {
 			 
 	            correntista.setNome(caixaTextoRecebidoNome.getText()); 
 	            correntista.setCpf(caixaTextoRecebidoCpf.getText()); 
@@ -67,6 +75,7 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	            correntista.setEmail(caixaTextoRecebidoEmail.getText());
 	            correntista.setQtdTransacao(Integer.parseInt(caixaTextoRecebidoQtd.getText()));
 	            correntista.setValorAnuidade(Double.parseDouble(caixaTextoRecebidoAnuidade.getText()));
+	            correntista.setTabela(tipoCorrentista);
 
 
 	            boolean sucesso = dao.salvarCorrentistaNoBanco(correntista);
@@ -76,6 +85,9 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 	            } else {
 	                JOptionPane.showMessageDialog(frameTelaCadastroCorrentista, "Erro ao realizar cadastro!");
 	            }
+			 }else {
+				 JOptionPane.showMessageDialog(null, "CPF ja cadastrado na base de dados.");
+			 }
 	        } else if (e.getSource() == botaoVoltar) {
 	            frameTelaCadastroCorrentista.dispose();
 	        }
