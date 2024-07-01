@@ -3,7 +3,11 @@ package tela;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +20,7 @@ import service.BuscarCep;
 
 public class TelaCadastroCorrentista {
 	
-public static void chamarTelaCadastroCorrentista(String correntista) {
+public static void chamarTelaCadastroCorrentista(String correntista) throws IOException {
 		
 		String campoNome = "Digite o nome do correntista";
 		String campoCpf = "Digite o CPF do correntista";
@@ -31,10 +35,12 @@ public static void chamarTelaCadastroCorrentista(String correntista) {
 		BuscarCep buscarCep = new BuscarCep();
 		
 		JFrame frameTelaCadastroCorrentista = new JFrame();
+		BufferedImage icon = ImageIO.read(new File("src/resources/images.jpg")); 
+		frameTelaCadastroCorrentista.setSize (500, 600);
+		frameTelaCadastroCorrentista.setLocationRelativeTo(null);
 		
 		GridLayout grid = new GridLayout(0, 1);
 		
-		frameTelaCadastroCorrentista.setSize (350, 600);
 		JPanel panelTelaCadastroCorrentista = new JPanel();
 		
 		JLabel labelCampoNome = new JLabel(campoNome);

@@ -13,6 +13,8 @@ public abstract class Correntista {
 	private int QtdTransacao;
 	private Double ValorAnuidade;
 	private String Tabela;
+	private Double calcularLimiteSaque;
+	private Double calcularLimiteCredito;
 	
 	
 	public String getNome() {
@@ -69,7 +71,7 @@ public abstract class Correntista {
 	public void setQtdTransacao(int qtdTransacao) {
 		QtdTransacao = qtdTransacao;
 	}
-	public double getValorAnuidade() {
+	public Double getValorAnuidade() {
 		return ValorAnuidade;
 	}
 	public void setValorAnuidade(Double valorAnuidade) {
@@ -81,6 +83,21 @@ public abstract class Correntista {
 	public void setTabela(String tabela) {
 		Tabela = tabela;
 	}
+	public Double getCalcularLimiteSaque() {
+		return calcularLimiteSaque;
+	}
+	public void setCalcularLimiteSaque(Double calcularLimiteSaque) {
+		this.calcularLimiteSaque = calcularLimiteSaque;
+	}
+	public Double getCalcularLimiteCredito() {
+		return calcularLimiteCredito;
+	}
+	public void setCalcularLimiteCredito(Double calcularLimiteCredito) {
+		this.calcularLimiteCredito = calcularLimiteCredito;
+	}
+	
+	
+	
 	
 	
 	

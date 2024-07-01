@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,15 +35,21 @@ public class ControllerTelaInicial implements ActionListener{
 			if(opcao.getText().equals("1") || opcao.getText().equals("2") || opcao.getText().equals("3")) {
 				switch (opcao.getText()) {
 					case "1": {
-						TelaSecundaria.chamarTelaMenuSecundario("correntista_basico");
-						System.out.println("Direcione para o menu secundário!");
+						try {
+							TelaSecundaria.chamarTelaMenuSecundario("correntista_basico");
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 						frameTelaInicial.setVisible(false);
 						break;
 						
 						}
 					case "2": {
-						TelaSecundaria.chamarTelaMenuSecundario("correntista_premium");
-						System.out.println("Direcione para o menu secundário!");
+						try {
+							TelaSecundaria.chamarTelaMenuSecundario("correntista_premium");
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 						break;
 						
 						}

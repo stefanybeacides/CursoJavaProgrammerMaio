@@ -11,14 +11,14 @@ import entidade.CorrentistaBasico;
 
 public class DaoCorrentistaBasico {
 		
-		public boolean salvarCorrentistaNoBanco(CorrentistaBasico correntista) {
+		public boolean salvarCorrentistaNoBanco(Correntista correntista) {
 			boolean salvamento = false;
 			
 			FabricaConexao conexaoFabricaConexao = new FabricaConexao(); 
 			Connection connectionCorrentistaBasico = null; 
 			PreparedStatement preparaOComandoSQL = null; 
 			
-			String comandoSqlInsert = "insert into " + correntista.getTabela() + " (nome, cpf, cep, logradouro, bairro, cidade, uf, email, qtdtransacao, anuidade) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String comandoSqlInsert = "insert into " + correntista.getTabela() + " (nome, cpf, cep, logradouro, bairro, cidade, uf, email, qtdtransacao, anuidade, limitesaque) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			try {
 				connectionCorrentistaBasico = conexaoFabricaConexao.criarConexao(); 
 				
@@ -34,6 +34,7 @@ public class DaoCorrentistaBasico {
 				preparaOComandoSQL.setString(8, correntista.getEmail());
 				preparaOComandoSQL.setInt(9, correntista.getQtdTransacao());
 				preparaOComandoSQL.setDouble(10, correntista.getValorAnuidade());
+				preparaOComandoSQL.setDouble(11, correntista.getCalcularLimiteSaque());
 				
 				preparaOComandoSQL.execute(); 
 
@@ -75,7 +76,7 @@ public class DaoCorrentistaBasico {
 
 	public static List<Correntista> retornoListaCorrentista(String tipoCorrentista) {
 		
-		String comandoSqlBuscarCorrentista = "SELECT * FROM " + tipoCorrentista;
+		String comandoSqlBuscarCorrentista = "SELECT * FROM correntista_basico";
 		List<Correntista> listaCorrentista = new ArrayList<>();
 		FabricaConexao conexaoFabricaConexao = new FabricaConexao();
 		
@@ -104,6 +105,8 @@ public class DaoCorrentistaBasico {
 				correntista.setEmail(resultadoTabelaBanco.getString("email"));
 				correntista.setQtdTransacao(resultadoTabelaBanco.getInt("qtdtransacao"));
 				correntista.setValorAnuidade(resultadoTabelaBanco.getDouble("anuidade"));
+				correntista.setCalcularLimiteSaque(resultadoTabelaBanco.getDouble("limitesaque"));
+				correntista.setTabela("correntista_basico");
 				
 				listaCorrentista.add(correntista);
 				

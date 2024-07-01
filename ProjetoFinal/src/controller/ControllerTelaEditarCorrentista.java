@@ -8,7 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import entidade.Correntista;
 import entidade.CorrentistaBasico;
+import entidade.CorrentistaPremium;
 import persistencia.DaoCorrentista;
 
 public class ControllerTelaEditarCorrentista implements ActionListener {
@@ -57,7 +59,11 @@ public class ControllerTelaEditarCorrentista implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		 if (e.getSource() == botaoAtualizar) {
-			 CorrentistaBasico correntista = new CorrentistaBasico();
+			 CorrentistaBasico correntistaBasico = new CorrentistaBasico();
+			 CorrentistaPremium correntistaPremium = new CorrentistaPremium();
+			 boolean sucesso = false;
+			 Correntista correntista = new Correntista() {
+			};
 			 DaoCorrentista dao = new DaoCorrentista();
 			 
 	            correntista.setNome(caixaTextoRecebidoNome.getText()); 
@@ -71,9 +77,20 @@ public class ControllerTelaEditarCorrentista implements ActionListener {
 	            correntista.setQtdTransacao(Integer.parseInt(caixaTextoRecebidoQtd.getText()));
 	            correntista.setValorAnuidade(Double.parseDouble(caixaTextoRecebidoAnuidade.getText()));
 	            correntista.setTabela(table);
+	            
+	            if(table.equals("correntista_premium")) {
+	            	correntista.setCalcularLimiteCredito(correntistaPremium.calcularLimiteCredito(Integer.parseInt(caixaTextoRecebidoQtd.getText())));
+		            sucesso = dao.atualizarCorrentistaNoBanco(correntista);
+
+	            	
+	            }if(table.equals("correntista_basico")) {
+	            	correntista.setCalcularLimiteSaque(correntistaBasico.calcularLimiteSaque(Integer.parseInt(caixaTextoRecebidoQtd.getText())));
+		            sucesso = dao.atualizarCorrentistaNoBanco(correntista);
+
+	            }
 
 
-	            boolean sucesso = dao.atualizarCorrentistaNoBanco(correntista);
+	            sucesso = dao.atualizarCorrentistaNoBanco(correntista);
 	            if (sucesso) {
 	                JOptionPane.showMessageDialog(frameTelaCadastroCorrentista, "Cadastro atualizado com sucesso!");
 	                limparCampos();

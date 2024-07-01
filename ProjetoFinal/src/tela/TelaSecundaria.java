@@ -3,7 +3,11 @@ package tela;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,9 +18,12 @@ import controller.ControllerTelaSecundaria;
 
 public class TelaSecundaria {
 	
-public static void chamarTelaMenuSecundario(String correntista) {
+public static void chamarTelaMenuSecundario(String correntista) throws IOException {
 		
 		JFrame frameTelaSecundaria = new JFrame(); 
+		BufferedImage icon = ImageIO.read(new File("src/resources/images.jpg")); 
+		frameTelaSecundaria.setSize(500,500); 
+		frameTelaSecundaria.setLocationRelativeTo(null);
 		
 		GridLayout grid = new GridLayout(0, 1);
 		

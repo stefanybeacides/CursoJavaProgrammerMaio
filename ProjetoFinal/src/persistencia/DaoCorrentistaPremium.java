@@ -6,20 +6,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import entidade.Correntista;
 import entidade.CorrentistaPremium;
 
 public class DaoCorrentistaPremium {
 	
-public class DaoCachorro {
 		
-		public boolean salvarCorrentistaNoBanco(CorrentistaPremium correntista) {
+		public boolean salvarCorrentistaNoBanco(Correntista correntista) {
 			boolean salvamento = false;
 			
 			FabricaConexao conexaoFabricaConexao = new FabricaConexao(); 
 			Connection connectionCorrentistaPremium = null; 
 			PreparedStatement preparaOComandoSQL = null; 
 			
-			String comandoSqlInsert = "insert into correntista_premium (nome, cpf, cep, logradouro, bairro, cidade, uf, email, qtdtransacao, anuidade) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String comandoSqlInsert = "insert into correntista_premium (nome, cpf, cep, logradouro, bairro, cidade, uf, email, qtdtransacao, anuidade, limitecredito) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			try {
 				connectionCorrentistaPremium = conexaoFabricaConexao.criarConexao(); 
 				
@@ -35,6 +35,7 @@ public class DaoCachorro {
 				preparaOComandoSQL.setString(8, correntista.getEmail());
 				preparaOComandoSQL.setInt(9, correntista.getQtdTransacao());
 				preparaOComandoSQL.setDouble(10, correntista.getValorAnuidade());
+				preparaOComandoSQL.setDouble(11, correntista.getCalcularLimiteCredito());
 				
 				preparaOComandoSQL.execute(); 
 
@@ -73,11 +74,11 @@ public class DaoCachorro {
 			
 		}
 
-}
 
-	public static List<CorrentistaPremium> retornoListaCorrentista() {
+
+	public static List<Correntista> retornoListaCorrentista(String tipoCorrentista) {
 		String comandoSqlBuscarCorrentista = "select * from correntista_premium";
-		List<CorrentistaPremium> listaCorrentista = new ArrayList<>();
+		List<Correntista> listaCorrentista = new ArrayList<>();
 		FabricaConexao conexaoFabricaConexao = new FabricaConexao();
 		
 		
@@ -102,8 +103,10 @@ public class DaoCachorro {
 				correntista.setCidade(resultadoTabelaBanco.getString("cidade"));
 				correntista.setUf(resultadoTabelaBanco.getString("uf"));
 				correntista.setEmail(resultadoTabelaBanco.getString("email"));
-				correntista.setQtdTransacao(resultadoTabelaBanco.getInt("qtd transação"));
-				correntista.setValorAnuidade(resultadoTabelaBanco.getDouble("valor anuidade"));
+				correntista.setQtdTransacao(resultadoTabelaBanco.getInt("qtdtransacao"));
+				correntista.setValorAnuidade(resultadoTabelaBanco.getDouble("anuidade"));
+				correntista.setCalcularLimiteCredito(resultadoTabelaBanco.getDouble("limitecredito"));
+				correntista.setTabela("correntista_premium");
 				
 				listaCorrentista.add(correntista);
 				

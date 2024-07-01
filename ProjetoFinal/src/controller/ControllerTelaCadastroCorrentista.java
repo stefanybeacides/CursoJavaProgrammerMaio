@@ -10,8 +10,10 @@ import javax.swing.JTextField;
 
 import entidade.Correntista;
 import entidade.CorrentistaBasico;
+import entidade.CorrentistaPremium;
 import persistencia.DaoCorrentista;
 import persistencia.DaoCorrentistaBasico;
+import persistencia.DaoCorrentistaPremium;
 
 public class ControllerTelaCadastroCorrentista implements ActionListener {
 	
@@ -59,26 +61,41 @@ public class ControllerTelaCadastroCorrentista implements ActionListener {
 		
 		 if (e.getSource() == botaoCadastrar) {
 			 CorrentistaBasico correntista = new CorrentistaBasico();
+			 Correntista correntistaSimples = new Correntista() {
+			};
+			 CorrentistaPremium correntistaPremium = new CorrentistaPremium();
 			 DaoCorrentistaBasico dao = new DaoCorrentistaBasico();
+			 DaoCorrentistaPremium daoPremium = new DaoCorrentistaPremium();
 			 DaoCorrentista daoCorrentista = new DaoCorrentista();
+			 boolean sucesso = false;
 			 Correntista correntista2 = daoCorrentista.buscarCorrentista(caixaTextoRecebidoCpf.getText());
 			 
-			 if (correntista2 == null) {
+			 if (correntista2.getCpf() == null) {
 			 
-	            correntista.setNome(caixaTextoRecebidoNome.getText()); 
-	            correntista.setCpf(caixaTextoRecebidoCpf.getText()); 
-	            correntista.setCep(caixaTextoRecebidoCep.getText());
-	            correntista.setLogradouro(caixaTextoRecebidoLogradouro.getText());
-	            correntista.setBairro(caixaTextoRecebidoBairro.getText());
-	            correntista.setCidade(caixaTextoRecebidoCidade.getText());
-	            correntista.setUf(caixaTextoRecebidoUf.getText());
-	            correntista.setEmail(caixaTextoRecebidoEmail.getText());
-	            correntista.setQtdTransacao(Integer.parseInt(caixaTextoRecebidoQtd.getText()));
-	            correntista.setValorAnuidade(Double.parseDouble(caixaTextoRecebidoAnuidade.getText()));
-	            correntista.setTabela(tipoCorrentista);
+				 correntistaSimples.setNome(caixaTextoRecebidoNome.getText()); 
+				 correntistaSimples.setCpf(caixaTextoRecebidoCpf.getText()); 
+				 correntistaSimples.setCep(caixaTextoRecebidoCep.getText());
+				 correntistaSimples.setLogradouro(caixaTextoRecebidoLogradouro.getText());
+				 correntistaSimples.setBairro(caixaTextoRecebidoBairro.getText());
+				 correntistaSimples.setCidade(caixaTextoRecebidoCidade.getText());
+				 correntistaSimples.setUf(caixaTextoRecebidoUf.getText());
+				 correntistaSimples.setEmail(caixaTextoRecebidoEmail.getText());
+				 correntistaSimples.setQtdTransacao(Integer.parseInt(caixaTextoRecebidoQtd.getText()));
+				 correntistaSimples.setValorAnuidade(Double.parseDouble(caixaTextoRecebidoAnuidade.getText()));
+				 correntistaSimples.setTabela(tipoCorrentista);
+	            
+	            if(tipoCorrentista.equals("correntista_premium")) {
+	            	correntistaSimples.setCalcularLimiteCredito(correntistaPremium.calcularLimiteCredito(Integer.parseInt(caixaTextoRecebidoQtd.getText())));
+		            sucesso = daoPremium.salvarCorrentistaNoBanco(correntistaSimples);
 
+	            	
+	            }if(tipoCorrentista.equals("correntista_basico")) {
+	            	correntistaSimples.setCalcularLimiteSaque(correntista.calcularLimiteSaque(Integer.parseInt(caixaTextoRecebidoQtd.getText())));
+		            sucesso = dao.salvarCorrentistaNoBanco(correntistaSimples);
 
-	            boolean sucesso = dao.salvarCorrentistaNoBanco(correntista);
+	            }
+	           
+
 	            if (sucesso) {
 	                JOptionPane.showMessageDialog(frameTelaCadastroCorrentista, "Cadastro realizado com sucesso!");
 	                limparCampos();

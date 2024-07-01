@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 import entidade.Correntista;
 import persistencia.DaoCorrentista;
 import persistencia.DaoCorrentistaBasico;
+import persistencia.DaoCorrentistaPremium;
 import tela.TelaCadastroCorrentista;
 import tela.TelaEditarCorrentista;
 import tela.TelaListarCorrentistas;
@@ -46,15 +48,22 @@ public class ControllerTelaSecundaria implements ActionListener{
 		if(opcao.getText().equals("1") || opcao.getText().equals("2") || opcao.getText().equals("3") || opcao.getText().equals("4") || opcao.getText().equals("5")) {
 			switch (opcao.getText()) {
 				case "1": {
-					TelaCadastroCorrentista.chamarTelaCadastroCorrentista(tipoCorrentista);
-					System.out.println("Direcione para o menu secundário!");
+					try {
+						TelaCadastroCorrentista.chamarTelaCadastroCorrentista(tipoCorrentista);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					frameTelaSecundaria.setVisible(false);
 					break;
 					
 					}
 				case "2": {
-					TelaListarCorrentistas.listarCorrentistas(DaoCorrentistaBasico.retornoListaCorrentista(tipoCorrentista));
-					System.out.println("Direcione para a lista de correntistas!");
+					if (tipoCorrentista.equals("correntista_basico")) {
+						TelaListarCorrentistas.listarCorrentistas(DaoCorrentistaBasico.retornoListaCorrentista(tipoCorrentista));
+					}if (tipoCorrentista.equals("correntista_premium")) {
+						TelaListarCorrentistas.listarCorrentistas(DaoCorrentistaPremium.retornoListaCorrentista(tipoCorrentista));
+
+					}
 					break;
 					
 					}
@@ -69,8 +78,6 @@ public class ControllerTelaSecundaria implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Campo CPF Vazio");
 
 					}
-					
-					System.out.println("Edite correntista!");
 					break;
 					
 					}
@@ -90,7 +97,6 @@ public class ControllerTelaSecundaria implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Campo CPF Vazio");
 
 					}
-					System.out.println("Delete correntista!");
 					break;
 					
 					}

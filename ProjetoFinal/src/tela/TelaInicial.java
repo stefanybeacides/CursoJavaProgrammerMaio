@@ -1,7 +1,13 @@
 package tela;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,13 +18,16 @@ import controller.ControllerTelaInicial;
 
 public class TelaInicial {
 	
-public void chamarTelaMenuInicial() {
+public void chamarTelaMenuInicial() throws IOException {
 		
 		JFrame frameTelaInicial = new JFrame(); 
+		BufferedImage icon = ImageIO.read(new File("src/resources/images.jpg")); 
+		frameTelaInicial.setSize(500,500); 
+		frameTelaInicial.setLocationRelativeTo(null);
 		
 		GridLayout grid = new GridLayout(0, 1);
 		
-		frameTelaInicial.setSize(300,300); 
+		
 		JPanel panelTelaInicial = new JPanel();
 		
 		JLabel labelCorrentistaBasico = new JLabel("1 - Correntista básico");
@@ -37,9 +46,18 @@ public void chamarTelaMenuInicial() {
 		JButton botaoEnviar = new JButton("Enviar");
 		panelTelaInicial.add(botaoEnviar);
 		
+		ImageIcon icon2 = new ImageIcon("src/resources/impacta.png");
+
+		
+		JLabel imageLabel = new JLabel(icon2);
+
+		
+		frameTelaInicial.add(imageLabel, BorderLayout.NORTH);
 
 		frameTelaInicial.add(panelTelaInicial);
 		frameTelaInicial.setVisible(true);
+		
+		
 		
 		ControllerTelaInicial controllerTelaInicial = new ControllerTelaInicial(frameTelaInicial, opcaoTexto, botaoEnviar);
 		botaoEnviar.addActionListener(controllerTelaInicial);
